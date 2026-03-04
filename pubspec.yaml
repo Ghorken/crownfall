@@ -1,0 +1,41 @@
+name: crownfall
+description: Crown Fall - A modified chess game with RPG elements
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.1
+  shared_preferences: ^2.2.2
+  audioplayers: ^6.5.1
+  lottie: ^3.1.0
+  flutter_animate: ^4.5.0
+  google_fonts: ^8.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    # PLACEHOLDER IMAGES - Sostituisci con i tuoi asset reali
+    # Struttura attesa per i pezzi:
+    # assets/images/pieces/{piece_id}_full.png  -> immagine a vita piena
+    # assets/images/pieces/{piece_id}_half.png  -> immagine a metà vita
+    # piece_id examples: pawn, rook, knight, bishop, queen, king
+    # per pezzi nuovi: fighter, miner, rifleman, healer, etc.
+    - assets/images/pieces/
+    - assets/images/ui/
+    - assets/images/skins/
+    - assets/images/boards/
+  # fonts:
+    # Puoi aggiungere font custom qui
+    # - family: MedievalFont
+    #   fonts:
+    #     - asset: assets/fonts/medieval.ttf
