@@ -84,7 +84,7 @@ class MainMenuScreen extends StatelessWidget {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => Provider<PlayerProfile>.value(
+                      builder: (_) => ChangeNotifierProvider<PlayerProfile>.value(
                         value: profile,
                         child: const ArmyBuilderScreen(),
                       ),

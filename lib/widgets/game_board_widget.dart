@@ -12,8 +12,6 @@ class GameBoardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final game = context.watch<GameProvider>();
-
     return AspectRatio(
       aspectRatio: 1,
       child: Container(
