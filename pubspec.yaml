@@ -20,6 +20,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
@@ -39,3 +40,15 @@ flutter:
     # - family: MedievalFont
     #   fonts:
     #     - asset: assets/fonts/medieval.ttf
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+  windows:
+    generate: true
+  macos:
+    generate: true
+  image_path: "assets/crownfall_icon.png"
+  min_sdk_android: 21
