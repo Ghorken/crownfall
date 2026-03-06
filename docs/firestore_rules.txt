@@ -1,0 +1,58 @@
+// ═══════════════════════════════════════════════════════════════
+// FIRESTORE SECURITY RULES - Crown Fall Online Multiplayer
+// ═══════════════════════════════════════════════════════════════
+//
+// Incolla queste regole nella console Firebase:
+// Firestore Database → Regole
+//
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Sessioni di gioco ──────────────────────────────────────
+    match /sessions/{sessionId} {
+
+      // Lettura: solo i giocatori nella sessione
+      allow read: if request.auth != null && (
+        resource.data.player1Id == request.auth.uid ||
+        resource.data.player2Id == request.auth.uid
+      );
+
+      // Creazione: solo utenti autenticati, e player1Id deve corrispondere all'uid
+      allow create: if request.auth != null &&
+        request.resource.data.player1Id == request.auth.uid;
+
+      // Update: solo i giocatori nella partita
+      allow update: if request.auth != null && (
+        resource.data.player1Id == request.auth.uid ||
+        resource.data.player2Id == request.auth.uid ||
+        // player2 può unirsi se la sessione è in attesa
+        (resource.data.status == 'waiting' &&
+         request.resource.data.player2Id == request.auth.uid)
+      );
+
+      // Delete: non permesso (le sessioni scadono automaticamente)
+      allow delete: if false;
+    }
+
+    // ── Profili giocatori ──────────────────────────────────────
+    // (per future estensioni come leaderboard)
+    match /players/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INDICI FIRESTORE
+// ═══════════════════════════════════════════════════════════════
+//
+// Crea il seguente indice composto su Firestore:
+//
+// Collection: sessions
+// Fields:     inviteCode (Ascending), status (Ascending)
+//
+// Puoi crearlo da Console Firebase → Firestore → Indici → Aggiungi indice
+// oppure verrà proposto automaticamente al primo errore di query.

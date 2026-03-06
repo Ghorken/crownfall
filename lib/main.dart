@@ -3,11 +3,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:crownfall/firebase_options.dart';
 import 'package:crownfall/models/player_profile.dart';
 import 'package:crownfall/screens/main_menu_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Inizializza Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   // Forza orientamento verticale (schermata fissa)
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
